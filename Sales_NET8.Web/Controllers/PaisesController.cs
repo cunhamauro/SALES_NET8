@@ -20,13 +20,13 @@ namespace Sales_NET8.Web.Controllers
         }
 
         // GET: Countries
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Indice()
         {
             return View(await _context.Countries.ToListAsync());
         }
 
         // GET: Countries/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Detalhes(int? id)
         {
             if (id == null)
             {
@@ -44,7 +44,7 @@ namespace Sales_NET8.Web.Controllers
         }
 
         // GET: Countries/Create
-        public IActionResult Create()
+        public IActionResult Adicionar()
         {
             return View();
         }
@@ -54,19 +54,19 @@ namespace Sales_NET8.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Country country)
+        public async Task<IActionResult> Adicionar([Bind("Id,Name")] Country country)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(country);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Indice));
             }
             return View(country);
         }
 
         // GET: Countries/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Editar(int? id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace Sales_NET8.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Country country)
+        public async Task<IActionResult> Editar(int id, [Bind("Id,Name")] Country country)
         {
             if (id != country.Id)
             {
@@ -111,13 +111,13 @@ namespace Sales_NET8.Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Indice));
             }
             return View(country);
         }
 
         // GET: Countries/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Remover(int? id)
         {
             if (id == null)
             {
@@ -135,9 +135,9 @@ namespace Sales_NET8.Web.Controllers
         }
 
         // POST: Countries/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Remover")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> ConfirmarRemover(int id)
         {
             var country = await _context.Countries.FindAsync(id);
             if (country != null)
@@ -146,7 +146,7 @@ namespace Sales_NET8.Web.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Indice));
         }
 
         private bool CountryExists(int id)

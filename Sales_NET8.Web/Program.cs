@@ -33,7 +33,7 @@ namespace Sales_NET8.Web
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Inicio}/{action=Index}/{id?}");
+                pattern: "{controller=Inicio}/{action=Indice}/{id?}");
 
             app.Run();
         }

@@ -13,7 +13,7 @@ namespace Sales_NET8.Web.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Indice()
         {
             return View();
         }
