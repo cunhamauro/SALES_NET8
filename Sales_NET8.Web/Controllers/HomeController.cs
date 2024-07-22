@@ -4,19 +4,20 @@ using System.Diagnostics;
 
 namespace Sales_NET8.Web.Controllers
 {
-    public class InicioController : Controller
+    public class HomeController : Controller
     {
-        private readonly ILogger<InicioController> _logger;
+        private readonly ILogger<HomeController> _logger;
 
-        public InicioController(ILogger<InicioController> logger)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Indice()
+        public IActionResult Index()
         {
             return View();
         }
+
 
         public IActionResult Privacy()
         {

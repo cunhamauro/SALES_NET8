@@ -2,9 +2,10 @@
 
 namespace Sales_NET8.Web.Controllers
 {
-    public class SobreController : Controller
+    [Route("Contacto")]
+    public class ContactController : Controller
     {
-        public IActionResult Indice()
+        public IActionResult Index()
         {
             return View();
         }

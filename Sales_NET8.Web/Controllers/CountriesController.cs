@@ -10,23 +10,25 @@ using Sales_NET8.Web.Data.Entities;
 
 namespace Sales_NET8.Web.Controllers
 {
-    public class PaisesController : Controller
+    [Route("Países")]
+    public class CountriesController : Controller
     {
         private readonly DataContext _context;
 
-        public PaisesController(DataContext context)
+        public CountriesController(DataContext context)
         {
             _context = context;
         }
 
         // GET: Countries
-        public async Task<IActionResult> Indice()
+        public async Task<IActionResult> Index()
         {
             return View(await _context.Countries.ToListAsync());
         }
 
         // GET: Countries/Details/5
-        public async Task<IActionResult> Detalhes(int? id)
+        [Route("Detalhes/{id?}")]
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -44,7 +46,8 @@ namespace Sales_NET8.Web.Controllers
         }
 
         // GET: Countries/Create
-        public IActionResult Adicionar()
+        [HttpGet("Adicionar")]
+        public IActionResult Create()
         {
             return View();
         }
@@ -52,21 +55,22 @@ namespace Sales_NET8.Web.Controllers
         // POST: Countries/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost("Adicionar")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Adicionar([Bind("Id,Name")] Country country)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Country country)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(country);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Indice));
+                return RedirectToAction(nameof(Index));
             }
             return View(country);
         }
 
         // GET: Countries/Edit/5
-        public async Task<IActionResult> Editar(int? id)
+        [HttpGet("Editar/{id?}")]
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -84,9 +88,9 @@ namespace Sales_NET8.Web.Controllers
         // POST: Countries/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost("Editar/{id?}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Editar(int id, [Bind("Id,Name")] Country country)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Country country)
         {
             if (id != country.Id)
             {
@@ -111,13 +115,14 @@ namespace Sales_NET8.Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Indice));
+                return RedirectToAction(nameof(Index));
             }
             return View(country);
         }
 
         // GET: Countries/Delete/5
-        public async Task<IActionResult> Remover(int? id)
+        [HttpGet("Remover/{id?}")]
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -135,9 +140,9 @@ namespace Sales_NET8.Web.Controllers
         }
 
         // POST: Countries/Delete/5
-        [HttpPost, ActionName("Remover")]
+        [HttpPost("Remover/{id?}"), ActionName("Remover")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ConfirmarRemover(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var country = await _context.Countries.FindAsync(id);
             if (country != null)
@@ -146,7 +151,7 @@ namespace Sales_NET8.Web.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Indice));
+            return RedirectToAction(nameof(Index));
         }
 
         private bool CountryExists(int id)
