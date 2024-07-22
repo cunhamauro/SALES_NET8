@@ -20,3 +20,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.social-icon {
+    font-size: 150%;
+}

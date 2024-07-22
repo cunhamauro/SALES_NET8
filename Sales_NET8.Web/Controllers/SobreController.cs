@@ -2,7 +2,7 @@
 
 namespace Sales_NET8.Web.Controllers
 {
-    public class ContactController : Controller
+    public class SobreController : Controller
     {
         public IActionResult Index()
         {
