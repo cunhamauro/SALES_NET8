@@ -4,32 +4,67 @@
     ViewData["Title"] = "Índice";
 }
 
-<h1>Países</h1>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 
 <p>
-    <a asp-action="Create">Adicionar País</a>
+    <a asp-action="Create" class="btn btn-outline-primary">Adicionar País</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">Editar</a> 
-                    <a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id">Detalhes</a>
-                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Remover</a>
-            </td>
-        </tr>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Países</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-responsive table-striped" id="MyTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+
+                                <td>
+                                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">Editar</a>
+                                    <a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id">Detalhes</a>
+                                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Remover</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#MyTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"
+                },
+                "aLengthMenu": [
+                    [20, 50, 100, 200, -1],
+                    [20, 50, 100, 200, "Todos"]
+                ]
+            });
+        });
+    </script>
 }
-    </tbody>
-</table>
