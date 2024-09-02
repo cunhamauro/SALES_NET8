@@ -11,6 +11,8 @@ namespace Sales_NET8.Web.Data
 
         public DbSet<Country> Countries { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
         // Ensure that each country has an unique name (index)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
